@@ -69,3 +69,19 @@ payments_data.duplicated().sum() # good, null duplicates
 # Check for duplicates in the Customers data
 customers_data.duplicated().sum() # no duplicates found
 
+# ======================================================================================================================
+# Filtering the Data
+# ======================================================================================================================
+
+# Select subset of the Orders data based on the order status (invoiced and not delivered yet)
+invoiced_orders_data = orders_data_cleaned[orders_data_cleaned['order_status'] == 'invoiced']
+
+# Reset index
+invoiced_orders_data = invoiced_orders_data.reset_index(drop=True)
+
+# Subset of the Payments data using credit card and value over 1000
+credit_card_payments_over_1000_data = payments_data[(payments_data['payment_type'] == 'credit_card') & (payments_data['payment_value'] > 1000)]
+
+# Select a subset of Customers
+customers_from_sp = customers_data[customers_data['customer_state'] == 'SP']
+
