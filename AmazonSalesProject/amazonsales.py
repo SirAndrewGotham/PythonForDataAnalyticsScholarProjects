@@ -13,9 +13,9 @@ Created on Sun Jul 06 21:50:24 2025
 @author: SirAndrewGotham
 """
 
+import os
 import pandas as pd
 
-# Load sales data from Excel file into Pandas DataFrame
-sales_data = pd.read_excel('sales_data.xlsx')
-# sales_data.head()
-sales_data.describe()
+# use os for correct relative path
+sales_data = pd.read_excel(os.getcwd() + '\\AmazonSalesProject\\sales_data.xlsx')
+
