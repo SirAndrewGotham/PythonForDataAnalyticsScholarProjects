@@ -25,4 +25,23 @@ Some tasks peformed during the project execution:
 - Performed dataframes aggregation
 - Performed exporting requested information to Excel files for emailing to investors
 
-## 2. To be continued...
+## 2. Ecommerce Orders Project
+
+Analyses of an e-commerce orders data based on an online store info contained in 3 Excel files:
+
+- customers.xlsx
+- orders.xlsx
+- order_payment.xlsx
+
+Owner is worried about excessive amount of orders being on credit as credit purchases means higher transaction fees shop owner has to pay to the bank.
+
+Objective:
+
+- join all three datasheets and perform some general light cleaning
+- sort orders by payment type to see if credit card orders have higher payment value compared to the debit card ones
+- sort and visualize payment values by month
+- visualize total payments by month
+
+
+
+## 3. To be continued...
