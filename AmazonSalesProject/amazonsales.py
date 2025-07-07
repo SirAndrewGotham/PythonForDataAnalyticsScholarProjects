@@ -39,3 +39,16 @@ category_and_status_average = sales_data.groupby(['Category', 'Status'], as_inde
 
 # OBJECTIVE 5: Total Sales by fulfilment and shipment type
 fulfilment_and_shipment_totals = sales_data.groupby(['Fulfilment', 'Courier Status'], as_index=False)['Amount'].sum().sort_values(by=['Amount'], ascending=False)
+
+# ======================================================================================================================
+# Exports
+# ======================================================================================================================
+
+# OBJECTIVE 6: Export Excel average amounts by category and status
+category_and_status_average.to_excel('AmazonSalesProject\\Exports\\average_sales_by_category.xlsx', index=False)
+
+# OBJECTIVE 7: Export Excel  total sales by shipment and performance
+# "Courier Status" to be renamed into "Shipment"
+total_sales_shipment_and_fulfilment = fulfilment_and_shipment_totals.rename(columns={'Courier Status': 'Shipment'})
+total_sales_shipment_and_fulfilment.to_excel('AmazonSalesProject\\Exports\\total_sales_by_shipment_and_fulfilment.xlsx', index=False)
+

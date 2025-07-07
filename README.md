@@ -2,20 +2,27 @@
 
 @author: SirAndrewGotham
 
-## Amazon Sales Project
+## 1. Amazon Sales Project
 
-Amazon Sales Data Analytics Project to study Python, NumPy and Pandas based on Indian Amazon Sales Report saved to Excel file (128974 records total).
+Amazon Sales Data Analyses Project to study Python, NumPy and Pandas based on an Indian Amazon Sales Report saved to Excel file (128974 records total).
 
 Objective:
 
 The merchant wants to know:
 
 - How many sales over 1000 made;
-- How many sales made in the "Tops" category with quantities of 3;
+- How many sales made in the "Top" category with quantities of 3;
 - Total sales by category;
 - Average amount by category and status;
 - Total Sales by fulfilment and shipment type.
 
-Last 2 tables (averages and total sales) should be exported for further emailing.
+Last 2 tables (averages and total sales) should be exported for further emailing to investors.
 
-Created on Sun Jul 06 21:50:24 2025
+Some tasks peformed during the project execution:
+
+- Cleaning data (removing null value columns, checking column types, etc.)
+- Performed data exploration
+- Performed dataframes aggregation
+- Performed exporting requested information to Excel files for emailing to investors
+
+## 2. To be continued...

@@ -1,3 +1,4 @@
 .idea
 venv
-./AmazonSalesProject/.idea
+/AmazonSalesProject/.idea
+/AmazonSalesProject/Exports/
