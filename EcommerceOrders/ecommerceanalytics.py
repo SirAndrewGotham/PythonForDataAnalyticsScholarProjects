@@ -116,6 +116,14 @@ payments_monthly_data = payments_monthly_data.reset_index()
 # convert month_year form period(M) to string
 payments_monthly_data["month_year"] = payments_monthly_data["month_year"].astype(str)
 
+# ======================================================================================================================
+# MATLIB PLOTS
+# ======================================================================================================================
+
+# ======================================================================================================================
+# Monthly payment values
+# ======================================================================================================================
+
 # x axis would be "month_year" of the payments_monthly_data and y zxis would be "payment_value" of the payments_monthly_data
 # plt.plot(payments_monthly_data["month_year"], payments_monthly_data["payment_value"], color='red', marker='o')
 # plt.ticklabel_format(useOffset=False, axis="y", style="plain")
@@ -128,14 +136,30 @@ payments_monthly_data["month_year"] = payments_monthly_data["month_year"].astype
 # plt.ylabel('Payment Value')
 # plt.yticks(fontsize=8)
 
-# Scatter plot to see payments values dependency related to payment installments
+# ======================================================================================================================
+# Scatter plot for payment values vs payment installments
+# ======================================================================================================================
 
+# # Scatter plot to see payments values dependency related to payment installments
+#
 scatter_df = joined_data.groupby("customer_unique_id").agg({'payment_value': 'sum', 'payment_installments': 'sum'})
+#
+# plt.scatter(scatter_df["payment_value"], scatter_df["payment_installments"])
+#
+# plt.xlabel("Payment Value")
+# plt.ylabel("Payment Installments")
+# plt.title("Payment Value vs Installments by Customer")
+#
+# plt.show()
 
-plt.scatter(scatter_df["payment_value"], scatter_df["payment_installments"])
+# ======================================================================================================================
+# Seaborn scatter plot
+# ======================================================================================================================
 
+sns.set_theme(style="darkgrid") # whitegrid, darkgrid, dark, white
+sns.scatterplot(data=scatter_df, x="payment_value", y="payment_installments")
 plt.xlabel("Payment Value")
 plt.ylabel("Payment Installments")
 plt.title("Payment Value vs Installments by Customer")
-
 plt.show()
+
