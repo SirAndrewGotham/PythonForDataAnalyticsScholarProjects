@@ -142,7 +142,7 @@ payments_monthly_data["month_year"] = payments_monthly_data["month_year"].astype
 
 # # Scatter plot to see payments values dependency related to payment installments
 #
-scatter_df = joined_data.groupby("customer_unique_id").agg({'payment_value': 'sum', 'payment_installments': 'sum'})
+# scatter_df = joined_data.groupby("customer_unique_id").agg({'payment_value': 'sum', 'payment_installments': 'sum'})
 #
 # plt.scatter(scatter_df["payment_value"], scatter_df["payment_installments"])
 #
@@ -156,10 +156,29 @@ scatter_df = joined_data.groupby("customer_unique_id").agg({'payment_value': 'su
 # Seaborn scatter plot
 # ======================================================================================================================
 
-sns.set_theme(style="darkgrid") # whitegrid, darkgrid, dark, white
-sns.scatterplot(data=scatter_df, x="payment_value", y="payment_installments")
-plt.xlabel("Payment Value")
-plt.ylabel("Payment Installments")
-plt.title("Payment Value vs Installments by Customer")
+# scatter_df = joined_data.groupby("customer_unique_id").agg({'payment_value': 'sum', 'payment_installments': 'sum'})
+# sns.set_theme(style="darkgrid") # whitegrid, darkgrid, dark, white
+# sns.scatterplot(data=scatter_df, x="payment_value", y="payment_installments")
+# plt.xlabel("Payment Value")
+# plt.ylabel("Payment Installments")
+# plt.title("Payment Value vs Installments by Customer")
+# plt.show()
+
+# ======================================================================================================================
+# Bar Chart to visualise payment value by payment type for each month of the year
+# ======================================================================================================================
+
+bar_chart_df = joined_data.groupby(['payment_type', 'month_year'])['payment_value'].sum()
+bar_chart_df = bar_chart_df.reset_index()
+
+pivot_data = bar_chart_df.pivot(index='month_year', columns='payment_type', values='payment_value')
+
+pivot_data.plot(kind='bar', stacked=True)
+plt.ticklabel_format(useOffset=False, axis='y', style='plain')
+plt.xlabel('Month of Payment')
+plt.ylabel('Payment Value')
+plt.title('Payment per Payment Type by Month')
+
 plt.show()
+
 
