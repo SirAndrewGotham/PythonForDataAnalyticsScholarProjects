@@ -30,7 +30,7 @@ payments_data = pd.read_excel(source_files_path + '\\order_payment.xlsx')
 # customers_data.isnull().sum()
 
 # Filling missing data in the Orders data with default value
-orders_data_cleaned = orders_data.fillna('N/A')
+orders_data = orders_data.fillna('N/A')
 # Confirm no null data left
 # orders_data_cleaned.isnull().sum()
 
@@ -47,13 +47,13 @@ payments_data.isnull().sum()
 
 ### ORDERS
 # Check for duplicated in Orders data
-orders_data_cleaned.duplicated().sum() # shows 3 duplicates, warn the dev team!
+orders_data.duplicated().sum() # shows 3 duplicates, warn the dev team!
 
 # Remove duplicates from the Orders data
-orders_data_cleaned = orders_data_cleaned.drop_duplicates()
+orders_data = orders_data.drop_duplicates()
 
 # Verify no duplicates left in the Orders table
-orders_data_cleaned.duplicated().sum() # good, null duplicates
+orders_data.duplicated().sum() # good, null duplicates
 
 ### PAYMENTS
 # Check for duplicates in the Payments data
@@ -74,7 +74,7 @@ customers_data.duplicated().sum() # no duplicates found
 # ======================================================================================================================
 
 # Select subset of the Orders data based on the order status (invoiced and not delivered yet)
-invoiced_orders_data = orders_data_cleaned[orders_data_cleaned['order_status'] == 'invoiced']
+invoiced_orders_data = orders_data[orders_data['order_status'] == 'invoiced']
 
 # Reset index
 invoiced_orders_data = invoiced_orders_data.reset_index(drop=True)
@@ -84,4 +84,17 @@ credit_card_payments_over_1000_data = payments_data[(payments_data['payment_type
 
 # Select a subset of Customers
 customers_from_sp = customers_data[customers_data['customer_state'] == 'SP']
+
+# ======================================================================================================================
+# Merge and Join Dataframes
+# ======================================================================================================================
+
+# Merge Orders data with Payments data on order_id column
+merged_data = pd.merge(orders_data, payments_data, on='order_id')
+
+# Join merged data with Customers on the customer_id column
+joined_data = pd.merge(merged_data, customers_data, on='customer_id')
+
+##### JOINED_DATA becomes main complete table to fork on
+
 
