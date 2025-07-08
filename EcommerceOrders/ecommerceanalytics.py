@@ -4,6 +4,8 @@ Ecommerce orders analyses project, see common README.md for a complete descripti
 
 import os
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # prepare a variable for the relative path to the source excel files
 source_files_path = os.getcwd() + '\\EcommerceOrders\\SourceFiles'
@@ -97,4 +99,23 @@ joined_data = pd.merge(merged_data, customers_data, on='customer_id')
 
 ##### JOINED_DATA becomes main complete table to fork on
 
+# ======================================================================================================================
+# Data Visualization
+# ======================================================================================================================
 
+# Create a field called "month" from order_purchase_timestamp (add that column to the table)
+joined_data["month_year"] = joined_data["order_purchase_timestamp"].dt.to_period("M")
+joined_data["week_year"] = joined_data["order_purchase_timestamp"].dt.to_period("W")
+joined_data["year"] = joined_data["order_purchase_timestamp"].dt.to_period("Y")
+
+# Group and create a plot
+# plt.plot(x, y) # this is the structure
+payments_monthly_data = joined_data.groupby("month_year")['payment_value'].sum()
+payments_monthly_data = payments_monthly_data.reset_index()
+
+# convert month_year form period(M) to string
+payments_monthly_data["month_year"] = payments_monthly_data["month_year"].astype(str)
+
+# x axis would be "month_year" of the payments_monthly_data and y zxis would be "payment_value" of the payments_monthly_data
+plt.plot(payments_monthly_data["month_year"], payments_monthly_data["payment_value"])
+plt.show()
