@@ -117,5 +117,25 @@ payments_monthly_data = payments_monthly_data.reset_index()
 payments_monthly_data["month_year"] = payments_monthly_data["month_year"].astype(str)
 
 # x axis would be "month_year" of the payments_monthly_data and y zxis would be "payment_value" of the payments_monthly_data
-plt.plot(payments_monthly_data["month_year"], payments_monthly_data["payment_value"])
+# plt.plot(payments_monthly_data["month_year"], payments_monthly_data["payment_value"], color='red', marker='o')
+# plt.ticklabel_format(useOffset=False, axis="y", style="plain")
+#
+# # format plot
+# plt.title("Payments by Month and Year")
+# plt.xlabel('Month and Year')
+# plt.xticks(rotation=90, fontsize=8)
+#
+# plt.ylabel('Payment Value')
+# plt.yticks(fontsize=8)
+
+# Scatter plot to see payments values dependency related to payment installments
+
+scatter_df = joined_data.groupby("customer_unique_id").agg({'payment_value': 'sum', 'payment_installments': 'sum'})
+
+plt.scatter(scatter_df["payment_value"], scatter_df["payment_installments"])
+
+plt.xlabel("Payment Value")
+plt.ylabel("Payment Installments")
+plt.title("Payment Value vs Installments by Customer")
+
 plt.show()
